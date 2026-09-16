@@ -1,1 +1,511 @@
-PLACEHOLDER
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Surge — Train Harder. Track Everything. Never Stop.</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Manrope:wght@400;500;600;700;800&display=swap">
+<style>
+  :root{
+    --bg: oklch(0.13 0.012 40);
+    --bg-alt: oklch(0.155 0.014 42);
+    --surface: oklch(0.185 0.015 42);
+    --surface-2: oklch(0.215 0.018 42);
+    --border: oklch(0.32 0.02 45 / 55%);
+    --border-soft: oklch(0.30 0.02 45 / 35%);
+    --text: oklch(0.96 0.006 90);
+    --text-dim: oklch(0.74 0.02 60);
+    --text-mute: oklch(0.56 0.02 55);
+    --orange: oklch(0.70 0.19 42);
+    --orange-hi: oklch(0.76 0.20 45);
+    --red: oklch(0.60 0.22 24);
+    --lime: oklch(0.87 0.22 128);
+    --lime-dim: oklch(0.76 0.19 128);
+    --font-display: 'Anton', 'Arial Narrow', sans-serif;
+    --font-body: 'Manrope', -apple-system, 'Segoe UI', sans-serif;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;background:var(--bg);}
+  body{font-family:var(--font-body);color:var(--text);-webkit-font-smoothing:antialiased;}
+  a{color:inherit;text-decoration:none;}
+  a:hover{color:var(--orange-hi);}
+  h1,h2,h3{margin:0;font-family:var(--font-display);text-transform:uppercase;letter-spacing:0.01em;}
+  p{margin:0;}
+  ul{margin:0;padding:0;list-style:none;}
+  .icon{width:22px;height:22px;flex-shrink:0;}
+  .icon-sm{width:16px;height:16px;}
+  .icon-xs{width:13px;height:13px;}
+
+  .page{min-width:1440px;background:var(--bg);}
+  .section-inner{max-width:1160px;margin:0 auto;padding:0 40px;}
+
+  .eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:13px;font-weight:800;letter-spacing:0.14em;color:var(--orange-hi);text-transform:uppercase;}
+  .h2{font-size:44px;line-height:1.05;color:var(--text);margin-top:14px;}
+  .section-head{display:flex;flex-direction:column;max-width:640px;margin:0 auto 56px;text-align:center;align-items:center;}
+  .section-sub{margin-top:16px;font-size:17px;line-height:1.55;color:var(--text-dim);font-weight:500;}
+
+  .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;font-family:var(--font-body);font-weight:800;font-size:15px;letter-spacing:0.01em;padding:13px 24px;border-radius:11px;border:1.5px solid transparent;cursor:pointer;transition:transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease, border-color 0.15s ease;}
+  .btn-lg{padding:17px 30px;font-size:16px;}
+  .btn-primary{background:linear-gradient(120deg, var(--orange), var(--red));color:oklch(0.14 0.01 40);box-shadow:0 8px 24px -8px oklch(0.62 0.21 35 / 65%);}
+  .btn-primary:hover{transform:translateY(-2px);box-shadow:0 12px 28px -8px oklch(0.62 0.21 35 / 80%);color:oklch(0.14 0.01 40);}
+  .btn-outline{background:transparent;border-color:var(--border);color:var(--text);}
+  .btn-outline:hover{border-color:var(--lime-dim);color:var(--lime);transform:translateY(-2px);}
+  .btn-ghost{background:transparent;color:var(--text-dim);padding:13px 14px;}
+  .btn-ghost:hover{color:var(--text);}
+  .btn-block{width:100%;}
+
+  .nav{position:relative;z-index:5;border-bottom:1px solid var(--border-soft);}
+  .nav-inner{max-width:1160px;margin:0 auto;padding:0 40px;height:88px;display:flex;align-items:center;justify-content:space-between;gap:32px;}
+  .brand{display:flex;align-items:center;gap:10px;font-family:var(--font-display);font-size:24px;letter-spacing:0.02em;}
+  .brand-mark{width:26px;height:26px;color:var(--orange-hi);}
+  .nav-links{display:flex;align-items:center;gap:36px;font-weight:700;font-size:14.5px;color:var(--text-dim);}
+  .nav-links a:hover{color:var(--text);}
+  .nav-cta{display:flex;align-items:center;gap:6px;}
+
+  .hero{position:relative;overflow:hidden;padding:96px 40px 88px;}
+  .hero-glow{position:absolute;top:-220px;left:50%;transform:translateX(-56%);width:900px;height:620px;background:radial-gradient(closest-side, oklch(0.62 0.2 35 / 38%), transparent 72%);filter:blur(10px);pointer-events:none;}
+  .hero-inner{position:relative;max-width:1160px;margin:0 auto;display:grid;grid-template-columns:minmax(0,620px) minmax(0,1fr);gap:64px;align-items:center;}
+  .h1{font-size:66px;line-height:0.98;color:var(--text);margin-top:22px;}
+  .h1 .hl{color:var(--lime);}
+  .lede{margin-top:26px;max-width:500px;font-size:18px;line-height:1.6;color:var(--text-dim);font-weight:500;}
+  .hero-actions{display:flex;align-items:center;gap:16px;margin-top:36px;}
+  .hero-proof{display:flex;align-items:center;gap:14px;margin-top:40px;font-size:14.5px;color:var(--text-dim);font-weight:600;}
+  .hero-proof strong{color:var(--text);}
+  .avatars-stack{display:flex;}
+  .avatars-stack span{width:34px;height:34px;border-radius:50%;border:2.5px solid var(--bg);margin-left:-10px;background:linear-gradient(135deg, var(--orange), var(--red));}
+  .avatars-stack span:first-child{margin-left:0;}
+  .avatars-stack span:nth-child(2){background:linear-gradient(135deg, var(--lime), var(--lime-dim));}
+  .avatars-stack span:nth-child(3){background:linear-gradient(135deg, oklch(0.7 0.17 60), var(--orange));}
+
+  .hero-visual{position:relative;height:460px;}
+  .hero-ring{position:absolute;inset:20px 60px;border-radius:50%;border:1.5px dashed var(--border);}
+  .float-card{position:absolute;display:flex;align-items:center;gap:14px;background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:18px 20px;box-shadow:0 20px 40px -18px oklch(0.05 0 0 / 70%);}
+  .fc-stat{display:flex;flex-direction:column;}
+  .float-card strong{font-family:var(--font-display);font-size:26px;color:var(--text);}
+  .float-card span{font-size:12.5px;color:var(--text-mute);font-weight:700;text-transform:uppercase;letter-spacing:0.04em;}
+  .float-card-1{top:20px;left:0;}
+  .float-card-2{top:210px;right:10px;}
+  .float-card-3{bottom:16px;left:60px;display:flex;flex-direction:column;align-items:flex-start;gap:10px;width:200px;}
+  .float-card-3 .fc-head{display:flex;align-items:center;gap:8px;font-size:12.5px;font-weight:800;color:var(--text-mute);text-transform:uppercase;letter-spacing:0.04em;}
+  .mini-bars{display:flex;align-items:flex-end;gap:5px;height:44px;width:100%;}
+  .mini-bars i{flex:1;display:block;border-radius:3px 3px 0 0;background:linear-gradient(180deg, var(--lime), var(--lime-dim));}
+
+  .stats-strip{background:var(--bg-alt);border-top:1px solid var(--border-soft);border-bottom:1px solid var(--border-soft);padding:44px 40px;}
+  .stats-inner{max-width:1160px;margin:0 auto;display:flex;align-items:center;justify-content:center;gap:56px;}
+  .stat{display:flex;flex-direction:column;align-items:center;gap:6px;text-align:center;}
+  .stat-num{font-family:var(--font-display);font-size:34px;color:var(--text);display:flex;align-items:center;gap:6px;}
+  .stat-num .icon{color:var(--orange-hi);width:24px;height:24px;}
+  .stat-label{font-size:13.5px;color:var(--text-mute);font-weight:700;text-transform:uppercase;letter-spacing:0.03em;}
+  .stat-div{width:1px;height:40px;background:var(--border);}
+
+  .workouts{padding:120px 40px;}
+  .workout-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px;}
+  .w-card{background:var(--surface);border:1px solid var(--border);border-radius:18px;padding:28px;display:flex;flex-direction:column;gap:16px;transition:transform 0.18s ease, border-color 0.18s ease, background 0.18s ease;}
+  .w-card:hover{transform:translateY(-5px);border-color:var(--border-soft);background:var(--surface-2);}
+  .w-icon{width:52px;height:52px;border-radius:14px;display:flex;align-items:center;justify-content:center;}
+  .w-icon .icon{width:26px;height:26px;}
+  .w-icon-flame{background:oklch(0.6 0.2 30 / 20%);color:var(--orange-hi);}
+  .w-icon-dumbbell{background:oklch(0.55 0.02 60 / 22%);color:var(--text);}
+  .w-icon-wind{background:oklch(0.85 0.2 130 / 18%);color:var(--lime);}
+  .w-icon-heart{background:oklch(0.6 0.22 24 / 20%);color:var(--red);}
+  .w-icon-glove{background:oklch(0.6 0.2 30 / 20%);color:var(--orange-hi);}
+  .w-icon-stretch{background:oklch(0.85 0.2 130 / 18%);color:var(--lime);}
+  .w-meta{display:flex;align-items:center;justify-content:space-between;}
+  .w-duration{font-size:12.5px;font-weight:800;letter-spacing:0.04em;color:var(--text-mute);text-transform:uppercase;}
+  .intensity{display:flex;align-items:center;gap:4px;}
+  .dot{width:7px;height:7px;border-radius:50%;background:var(--border);}
+  .dot.on-lime{background:var(--lime);}
+  .dot.on-orange{background:var(--orange-hi);}
+  .dot.on-red{background:var(--red);}
+  .w-card h3{font-family:var(--font-body);text-transform:none;font-size:19px;font-weight:800;letter-spacing:0;}
+  .w-card p{font-size:14.5px;line-height:1.55;color:var(--text-dim);font-weight:500;}
+
+  .progress-demo{padding:0 40px 120px;}
+  .dash-panel{background:var(--surface);border:1px solid var(--border);border-radius:22px;padding:36px;}
+  .dash-stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px;padding-bottom:28px;margin-bottom:28px;border-bottom:1px solid var(--border-soft);}
+  .dash-stat{display:flex;align-items:center;gap:14px;}
+  .dash-stat-icon{width:44px;height:44px;border-radius:12px;display:flex;align-items:center;justify-content:center;background:var(--surface-2);flex-shrink:0;}
+  .dash-stat div{display:flex;flex-direction:column;}
+  .dash-stat strong{font-family:var(--font-display);font-size:26px;color:var(--text);}
+  .dash-stat span{font-size:12.5px;color:var(--text-mute);font-weight:700;text-transform:uppercase;letter-spacing:0.03em;}
+  .dash-body{display:grid;grid-template-columns:minmax(0,1.4fr) minmax(0,1fr);gap:28px;}
+  .dash-chart-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:22px;}
+  .dash-chart-head span:first-child{font-size:13px;font-weight:800;color:var(--text-dim);text-transform:uppercase;letter-spacing:0.04em;}
+  .dash-chart-total{font-family:var(--font-display);font-size:18px;color:var(--lime);}
+  .bars{display:flex;align-items:flex-end;gap:14px;height:170px;padding:0 4px;border-bottom:1px solid var(--border-soft);}
+  .bar-col{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;gap:10px;height:100%;}
+  .bar{width:100%;max-width:34px;border-radius:7px 7px 3px 3px;background:linear-gradient(180deg, var(--orange-hi), var(--red));}
+  .bar-active{background:linear-gradient(180deg, var(--lime), var(--lime-dim));}
+  .bar-col span{font-size:12px;font-weight:700;color:var(--text-mute);}
+  .dash-prs{border-left:1px solid var(--border-soft);padding-left:28px;}
+  .pr-list li{display:flex;align-items:center;gap:12px;padding:12px 0;border-bottom:1px solid var(--border-soft);}
+  .pr-list li:last-child{border-bottom:none;padding-bottom:0;}
+  .pr-list span{flex:1;font-size:14.5px;font-weight:700;color:var(--text-dim);}
+  .pr-list strong{font-size:15px;color:var(--text);}
+  .trend-up{display:flex;align-items:center;gap:3px;font-size:12.5px;font-weight:800;color:var(--lime);width:52px;justify-content:flex-end;}
+
+  .trainers{padding:0 40px 120px;}
+  .trainer-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:24px;}
+  .t-card{background:var(--surface);border:1px solid var(--border);border-radius:18px;padding:26px;display:flex;flex-direction:column;gap:4px;text-align:center;align-items:center;transition:transform 0.18s ease, border-color 0.18s ease;}
+  .t-card:hover{transform:translateY(-5px);border-color:var(--border-soft);}
+  .t-avatar{width:76px;height:76px;border-radius:50%;display:flex;align-items:center;justify-content:center;margin-bottom:14px;}
+  .t-avatar .icon{width:34px;height:34px;color:oklch(0.16 0.01 40);}
+  .t-avatar-orange{background:linear-gradient(135deg, var(--orange), var(--red));}
+  .t-avatar-lime{background:linear-gradient(135deg, var(--lime), var(--lime-dim));}
+  .t-avatar-amber{background:linear-gradient(135deg, oklch(0.78 0.17 80), var(--orange-hi));}
+  .t-avatar-red{background:linear-gradient(135deg, var(--red), oklch(0.5 0.2 12));}
+  .t-card h3{font-family:var(--font-body);text-transform:none;font-size:17.5px;font-weight:800;}
+  .t-role{font-size:12.5px;font-weight:800;color:var(--orange-hi);text-transform:uppercase;letter-spacing:0.03em;margin-top:2px;}
+  .t-card p{margin-top:14px;font-size:14px;line-height:1.55;color:var(--text-dim);font-weight:500;}
+  .t-foot{display:flex;align-items:center;justify-content:space-between;width:100%;margin-top:20px;padding-top:16px;border-top:1px solid var(--border-soft);}
+  .t-rating{display:flex;align-items:center;gap:5px;font-size:13.5px;font-weight:800;color:var(--text);}
+  .t-rating .icon{color:var(--lime);}
+  .t-foot a{font-size:13.5px;font-weight:800;color:var(--text-dim);}
+  .t-foot a:hover{color:var(--lime);}
+
+  .pricing{padding:0 40px 110px;}
+  .price-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px;align-items:stretch;}
+  .p-card{position:relative;background:var(--surface);border:1px solid var(--border);border-radius:22px;padding:34px 30px;display:flex;flex-direction:column;}
+  .p-card-featured{background:var(--surface-2);border-color:var(--orange-hi);box-shadow:0 24px 50px -20px oklch(0.62 0.21 35 / 45%);}
+  .p-badge{position:absolute;top:-14px;left:50%;transform:translateX(-50%);background:linear-gradient(120deg, var(--orange), var(--red));color:oklch(0.14 0.01 40);font-size:11.5px;font-weight:800;letter-spacing:0.06em;padding:6px 16px;border-radius:999px;}
+  .p-card h3{font-family:var(--font-body);text-transform:none;font-size:20px;font-weight:800;}
+  .p-price{display:flex;align-items:baseline;gap:6px;margin-top:18px;}
+  .p-amount{font-family:var(--font-display);font-size:42px;color:var(--text);}
+  .p-period{font-size:14px;color:var(--text-mute);font-weight:700;}
+  .p-sub{margin-top:8px;font-size:14px;color:var(--text-dim);font-weight:600;}
+  .p-features{margin-top:24px;display:flex;flex-direction:column;gap:14px;flex-grow:1;}
+  .p-features li{display:flex;align-items:center;gap:10px;font-size:14.5px;font-weight:600;color:var(--text-dim);}
+  .p-features .icon{color:var(--lime);}
+  .p-card .btn{margin-top:28px;}
+  .price-note{text-align:center;margin-top:32px;font-size:13.5px;color:var(--text-mute);font-weight:600;}
+
+  .footer{border-top:1px solid var(--border-soft);padding:64px 40px 0;}
+  .footer-inner{display:grid;grid-template-columns:minmax(0,1.6fr) repeat(3,minmax(0,1fr));gap:40px;padding-bottom:48px;}
+  .footer-brand p{margin-top:14px;font-size:14px;color:var(--text-dim);font-weight:500;max-width:260px;line-height:1.55;}
+  .footer-social{display:flex;align-items:center;gap:12px;margin-top:22px;}
+  .footer-social a{width:38px;height:38px;border-radius:10px;border:1px solid var(--border);display:flex;align-items:center;justify-content:center;}
+  .footer-social a:hover{border-color:var(--lime-dim);color:var(--lime);}
+  .footer-social .icon{width:17px;height:17px;}
+  .footer-col{display:flex;flex-direction:column;gap:14px;}
+  .footer-col h4{font-size:13px;font-weight:800;letter-spacing:0.04em;text-transform:uppercase;color:var(--text-mute);margin-bottom:2px;}
+  .footer-col a{font-size:14.5px;font-weight:600;color:var(--text-dim);}
+  .footer-col a:hover{color:var(--text);}
+  .footer-bottom{max-width:1160px;margin:0 auto;padding:24px 0;border-top:1px solid var(--border-soft);display:flex;align-items:center;justify-content:space-between;font-size:13px;color:var(--text-mute);font-weight:600;}
+  .footer-bottom div{display:flex;gap:24px;}
+  .footer-bottom a:hover{color:var(--text-dim);}
+</style>
+</head>
+<body>
+
+<svg style="position:absolute;width:0;height:0;overflow:hidden" aria-hidden="true">
+  <defs>
+    <symbol id="i-bolt" viewBox="0 0 24 24"><polygon points="13 2 4 14 11 14 10 22 20 10 13 10" fill="currentColor"/></symbol>
+    <symbol id="i-flame" viewBox="0 0 24 24"><path d="M12 2c2 3 4 5 4 9a4 4 0 1 1-8 0c0-1 .3-2 .8-2.8.4 1 1.2 1.3 1.7.6-.6-1.4 0-3 1.5-4.8z" fill="currentColor"/></symbol>
+    <symbol id="i-dumbbell" viewBox="0 0 24 24" fill="currentColor"><rect x="1" y="9" width="3.4" height="6" rx="1"/><rect x="19.6" y="9" width="3.4" height="6" rx="1"/><rect x="5.4" y="7.3" width="2.6" height="9.4" rx="1"/><rect x="16" y="7.3" width="2.6" height="9.4" rx="1"/><rect x="7.6" y="11" width="8.8" height="2" rx="1"/></symbol>
+    <symbol id="i-wind" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h11.5a3 3 0 1 0-3-3"/><path d="M3 12.5h15.5a3 3 0 1 1-3 3"/><path d="M3 17h9.5"/></symbol>
+    <symbol id="i-heart" viewBox="0 0 24 24"><path d="M12 21s-7.5-4.6-10-9.3C.5 8.2 2.4 4.5 6 4c2-.3 3.7.8 6 3 2.3-2.2 4-3.3 6-3 3.6.5 5.5 4.2 4 7.7C19.5 16.4 12 21 12 21z" fill="currentColor"/></symbol>
+    <symbol id="i-glove" viewBox="0 0 24 24" fill="currentColor"><path d="M3 13.5a6 6 0 0 1 6-6h1a4 4 0 0 1 4 4v1.3a5.7 5.7 0 0 1-5.7 5.7H9A6 6 0 0 1 3 12.5v1z"/><rect x="13" y="3.5" width="7.5" height="7.5" rx="2.4"/></symbol>
+    <symbol id="i-stretch" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="4.2" r="2"/><path d="M12 6.5v6M8 9.5l4 3 4-3M9 21l3-6 3 6"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12.5l5 5L20 6"/></symbol>
+    <symbol id="i-star" viewBox="0 0 24 24"><path d="M12 2l2.9 6.3 6.9.6-5.2 4.6 1.6 6.8L12 16.9 5.8 20.3l1.6-6.8L2.2 8.9l6.9-.6z" fill="currentColor"/></symbol>
+    <symbol id="i-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h15M13 6l6 6-6 6"/></symbol>
+    <symbol id="i-play" viewBox="0 0 24 24"><path d="M6 4l14 8-14 8z" fill="currentColor"/></symbol>
+    <symbol id="i-chart" viewBox="0 0 24 24"><rect x="3.5" y="12" width="4" height="8.5" fill="currentColor"/><rect x="10" y="7" width="4" height="13.5" fill="currentColor"/><rect x="16.5" y="3" width="4" height="17.5" fill="currentColor"/></symbol>
+    <symbol id="i-trophy" viewBox="0 0 24 24"><path d="M7 3h10v6a5 5 0 0 1-10 0V3z" fill="currentColor"/><rect x="10.5" y="13" width="3" height="4.5" fill="currentColor"/><rect x="7.5" y="19" width="9" height="2.2" rx="1.1" fill="currentColor"/></symbol>
+    <symbol id="i-person" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4" fill="currentColor"/><path d="M4 20c0-4.4 3.6-7 8-7s8 2.6 8 7" fill="currentColor"/></symbol>
+    <symbol id="i-trend-up" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 16l5.5-5.5L14 15l6-7"/><path d="M15 8h5v5"/></symbol>
+    <symbol id="i-ig" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.3" cy="6.7" r="1" fill="currentColor" stroke="none"/></symbol>
+    <symbol id="i-x" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><path d="M5 5l14 14M19 5L5 19"/></symbol>
+    <symbol id="i-note" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="8.5" cy="18" r="3" fill="currentColor" stroke="none"/><path d="M11.5 18V4l7 2v6"/></symbol>
+  </defs>
+</svg>
+
+<div class="page">
+
+  <nav class="nav">
+    <div class="nav-inner">
+      <div class="brand"><svg class="icon brand-mark"><use href="#i-bolt"></use></svg><span>SURGE</span></div>
+      <div class="nav-links">
+        <a href="#workouts">Workouts</a>
+        <a href="#progress">Progress</a>
+        <a href="#trainers">Trainers</a>
+        <a href="#pricing">Pricing</a>
+      </div>
+      <div class="nav-cta">
+        <a class="btn btn-ghost" href="#">Log In</a>
+        <a class="btn btn-primary" href="#pricing">Start Free</a>
+      </div>
+    </div>
+  </nav>
+
+  <section class="hero">
+    <div class="hero-glow"></div>
+    <div class="hero-inner">
+      <div>
+        <span class="eyebrow"><svg class="icon-sm"><use href="#i-bolt"></use></svg>THE ALL-IN-ONE TRAINING APP</span>
+        <h1 class="h1">SHOW UP.<br>LEVEL UP.<br><span class="hl">NEVER STOP.</span></h1>
+        <p class="lede">Personalized workouts, real-time progress tracking, and world-class trainers — all in your pocket. Your next PR starts today.</p>
+        <div class="hero-actions">
+          <a class="btn btn-primary btn-lg" href="#pricing">Start Free Trial <svg class="icon"><use href="#i-arrow"></use></svg></a>
+          <a class="btn btn-outline btn-lg" href="#progress"><svg class="icon"><use href="#i-play"></use></svg>See How It Works</a>
+        </div>
+        <div class="hero-proof">
+          <div class="avatars-stack"><span></span><span></span><span></span></div>
+          <span><strong>40,000+</strong> athletes already training</span>
+        </div>
+      </div>
+      <div class="hero-visual">
+        <div class="hero-ring"></div>
+        <div class="float-card float-card-1">
+          <svg class="icon" style="color:var(--orange-hi);width:28px;height:28px;"><use href="#i-flame"></use></svg>
+          <div class="fc-stat"><strong>24</strong><span>Day Streak</span></div>
+        </div>
+        <div class="float-card float-card-2">
+          <svg class="icon" style="color:var(--red);width:28px;height:28px;"><use href="#i-heart"></use></svg>
+          <div class="fc-stat"><strong>620</strong><span>Cal Today</span></div>
+        </div>
+        <div class="float-card float-card-3">
+          <span class="fc-head"><svg class="icon-sm" style="color:var(--lime)"><use href="#i-chart"></use></svg>THIS WEEK</span>
+          <div class="mini-bars">
+            <i style="height:45%"></i><i style="height:65%"></i><i style="height:35%"></i><i style="height:80%"></i><i style="height:55%"></i><i style="height:95%"></i><i style="height:70%"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="stats-strip">
+    <div class="stats-inner">
+      <div class="stat"><span class="stat-num">180K+</span><span class="stat-label">Workouts logged weekly</span></div>
+      <div class="stat-div"></div>
+      <div class="stat"><span class="stat-num"><svg class="icon"><use href="#i-star"></use></svg>4.9</span><span class="stat-label">Average app rating</span></div>
+      <div class="stat-div"></div>
+      <div class="stat"><span class="stat-num">92%</span><span class="stat-label">Hit their weekly goal</span></div>
+    </div>
+  </section>
+
+  <section class="workouts" id="workouts">
+    <div class="section-inner">
+      <div class="section-head">
+        <span class="eyebrow">WORKOUT LIBRARY</span>
+        <h2 class="h2">Pick your intensity.<br>Press start.</h2>
+        <p class="section-sub">Six training styles, hundreds of sessions — built to fit whatever your day looks like.</p>
+      </div>
+      <div class="workout-grid">
+        <article class="w-card">
+          <div class="w-icon w-icon-flame"><svg class="icon"><use href="#i-flame"></use></svg></div>
+          <div class="w-meta"><span class="w-duration">30 MIN</span><span class="intensity"><i class="dot on-red"></i><i class="dot on-red"></i><i class="dot on-red"></i></span></div>
+          <h3>HIIT Burn</h3>
+          <p>Max-effort intervals that torch calories fast and build serious engine.</p>
+        </article>
+        <article class="w-card">
+          <div class="w-icon w-icon-dumbbell"><svg class="icon"><use href="#i-dumbbell"></use></svg></div>
+          <div class="w-meta"><span class="w-duration">45 MIN</span><span class="intensity"><i class="dot on-orange"></i><i class="dot on-orange"></i><i class="dot"></i></span></div>
+          <h3>Strength Foundations</h3>
+          <p>Build raw power with progressive overload and rock-solid form.</p>
+        </article>
+        <article class="w-card">
+          <div class="w-icon w-icon-wind"><svg class="icon"><use href="#i-wind"></use></svg></div>
+          <div class="w-meta"><span class="w-duration">25 MIN</span><span class="intensity"><i class="dot on-lime"></i><i class="dot"></i><i class="dot"></i></span></div>
+          <h3>Power Yoga</h3>
+          <p>Mobility and breath work so you recover stronger, not just softer.</p>
+        </article>
+        <article class="w-card">
+          <div class="w-icon w-icon-heart"><svg class="icon"><use href="#i-heart"></use></svg></div>
+          <div class="w-meta"><span class="w-duration">20 MIN</span><span class="intensity"><i class="dot on-red"></i><i class="dot on-red"></i><i class="dot on-red"></i></span></div>
+          <h3>Cardio Surge</h3>
+          <p>Heart-pounding intervals that push your endurance ceiling higher.</p>
+        </article>
+        <article class="w-card">
+          <div class="w-icon w-icon-glove"><svg class="icon"><use href="#i-glove"></use></svg></div>
+          <div class="w-meta"><span class="w-duration">40 MIN</span><span class="intensity"><i class="dot on-red"></i><i class="dot on-red"></i><i class="dot on-red"></i></span></div>
+          <h3>Boxing Circuit</h3>
+          <p>Combos, footwork, and power shots for full-body conditioning.</p>
+        </article>
+        <article class="w-card">
+          <div class="w-icon w-icon-stretch"><svg class="icon"><use href="#i-stretch"></use></svg></div>
+          <div class="w-meta"><span class="w-duration">15 MIN</span><span class="intensity"><i class="dot on-lime"></i><i class="dot"></i><i class="dot"></i></span></div>
+          <h3>Core &amp; Mobility</h3>
+          <p>A quick daily reset that keeps your whole body resilient.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="progress-demo" id="progress">
+    <div class="section-inner">
+      <div class="section-head">
+        <span class="eyebrow">PROGRESS, VISUALIZED</span>
+        <h2 class="h2">Watch every rep<br>add up.</h2>
+        <p class="section-sub">Streaks, personal records, and weekly trends — updated the moment you finish a set.</p>
+      </div>
+      <div class="dash-panel">
+        <div class="dash-stats">
+          <div class="dash-stat">
+            <div class="dash-stat-icon"><svg class="icon" style="color:var(--orange-hi)"><use href="#i-flame"></use></svg></div>
+            <div><strong>24</strong><span>Day streak</span></div>
+          </div>
+          <div class="dash-stat">
+            <div class="dash-stat-icon"><svg class="icon" style="color:var(--red)"><use href="#i-heart"></use></svg></div>
+            <div><strong>620</strong><span>Calories today</span></div>
+          </div>
+          <div class="dash-stat">
+            <div class="dash-stat-icon"><svg class="icon" style="color:var(--lime)"><use href="#i-chart"></use></svg></div>
+            <div><strong>48</strong><span>Active minutes</span></div>
+          </div>
+        </div>
+        <div class="dash-body">
+          <div class="dash-chart">
+            <div class="dash-chart-head"><span>Weekly calories burned</span><span class="dash-chart-total">3,240 kcal</span></div>
+            <div class="bars">
+              <div class="bar-col"><div class="bar" style="height:52%"></div><span>M</span></div>
+              <div class="bar-col"><div class="bar" style="height:68%"></div><span>T</span></div>
+              <div class="bar-col"><div class="bar" style="height:40%"></div><span>W</span></div>
+              <div class="bar-col"><div class="bar" style="height:80%"></div><span>T</span></div>
+              <div class="bar-col"><div class="bar" style="height:60%"></div><span>F</span></div>
+              <div class="bar-col"><div class="bar" style="height:95%"></div><span>S</span></div>
+              <div class="bar-col"><div class="bar bar-active" style="height:74%"></div><span>S</span></div>
+            </div>
+          </div>
+          <div class="dash-prs">
+            <div class="dash-chart-head"><span>Personal records</span><svg class="icon-sm" style="color:var(--orange-hi)"><use href="#i-trophy"></use></svg></div>
+            <ul class="pr-list">
+              <li><span>Bench Press</span><strong>225 lb</strong><em class="trend-up"><svg class="icon-xs"><use href="#i-trend-up"></use></svg>12%</em></li>
+              <li><span>5K Run</span><strong>24:10</strong><em class="trend-up"><svg class="icon-xs"><use href="#i-trend-up"></use></svg>8%</em></li>
+              <li><span>Plank Hold</span><strong>4:15</strong><em class="trend-up"><svg class="icon-xs"><use href="#i-trend-up"></use></svg>20%</em></li>
+              <li><span>Back Squat</span><strong>275 lb</strong><em class="trend-up"><svg class="icon-xs"><use href="#i-trend-up"></use></svg>5%</em></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="trainers" id="trainers">
+    <div class="section-inner">
+      <div class="section-head">
+        <span class="eyebrow">MEET THE COACHES</span>
+        <h2 class="h2">Trained by people<br>who train athletes.</h2>
+        <p class="section-sub">Every plan is built or reviewed by certified coaches — message them anytime.</p>
+      </div>
+      <div class="trainer-grid">
+        <article class="t-card">
+          <div class="t-avatar t-avatar-orange"><svg class="icon"><use href="#i-person"></use></svg></div>
+          <h3>Jordan Reyes</h3>
+          <span class="t-role">Strength &amp; Conditioning</span>
+          <p>Ex-collegiate powerlifter who turns "I can't" into a five-rep PR.</p>
+          <div class="t-foot"><span class="t-rating"><svg class="icon-sm"><use href="#i-star"></use></svg>4.9</span><a href="#">Book a session</a></div>
+        </article>
+        <article class="t-card">
+          <div class="t-avatar t-avatar-lime"><svg class="icon"><use href="#i-person"></use></svg></div>
+          <h3>Amara Chen</h3>
+          <span class="t-role">HIIT &amp; Metabolic</span>
+          <p>Builds sessions that feel like 20 minutes and burn like an hour.</p>
+          <div class="t-foot"><span class="t-rating"><svg class="icon-sm"><use href="#i-star"></use></svg>5.0</span><a href="#">Book a session</a></div>
+        </article>
+        <article class="t-card">
+          <div class="t-avatar t-avatar-red"><svg class="icon"><use href="#i-person"></use></svg></div>
+          <h3>Malik Thompson</h3>
+          <span class="t-role">Boxing &amp; Performance</span>
+          <p>Former amateur boxer coaching footwork, power, and killer instinct.</p>
+          <div class="t-foot"><span class="t-rating"><svg class="icon-sm"><use href="#i-star"></use></svg>4.8</span><a href="#">Book a session</a></div>
+        </article>
+        <article class="t-card">
+          <div class="t-avatar t-avatar-amber"><svg class="icon"><use href="#i-person"></use></svg></div>
+          <h3>Sofia Marin</h3>
+          <span class="t-role">Mobility &amp; Recovery</span>
+          <p>Keeps you training injury-free with smarter movement, not less of it.</p>
+          <div class="t-foot"><span class="t-rating"><svg class="icon-sm"><use href="#i-star"></use></svg>4.9</span><a href="#">Book a session</a></div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="pricing" id="pricing">
+    <div class="section-inner">
+      <div class="section-head">
+        <span class="eyebrow">MEMBERSHIP</span>
+        <h2 class="h2">Pick your level.<br>Cancel anytime.</h2>
+        <p class="section-sub">Start free. Upgrade the moment you're ready to push harder.</p>
+      </div>
+      <div class="price-grid">
+        <article class="p-card">
+          <h3>Starter</h3>
+          <div class="p-price"><span class="p-amount">$0</span><span class="p-period">/ forever</span></div>
+          <p class="p-sub">For building the habit.</p>
+          <ul class="p-features">
+            <li><svg class="icon-sm"><use href="#i-check"></use></svg>Core workout library</li>
+            <li><svg class="icon-sm"><use href="#i-check"></use></svg>Weekly training plan</li>
+            <li><svg class="icon-sm"><use href="#i-check"></use></svg>Community feed</li>
+          </ul>
+          <a class="btn btn-outline btn-block" href="#">Start Free</a>
+        </article>
+        <article class="p-card p-card-featured">
+          <span class="p-badge">MOST POPULAR</span>
+          <h3>Pro</h3>
+          <div class="p-price"><span class="p-amount">$14.99</span><span class="p-period">/ month</span></div>
+          <p class="p-sub">For people chasing a PR.</p>
+          <ul class="p-features">
+            <li><svg class="icon-sm"><use href="#i-check"></use></svg>Full workout library</li>
+            <li><svg class="icon-sm"><use href="#i-check"></use></svg>Advanced progress analytics</li>
+            <li><svg class="icon-sm"><use href="#i-check"></use></svg>Trainer messaging</li>
+            <li><svg class="icon-sm"><use href="#i-check"></use></svg>Offline downloads</li>
+          </ul>
+          <a class="btn btn-primary btn-block" href="#">Go Pro</a>
+        </article>
+        <article class="p-card">
+          <h3>Elite</h3>
+          <div class="p-price"><span class="p-amount">$29.99</span><span class="p-period">/ month</span></div>
+          <p class="p-sub">For the fully coached life.</p>
+          <ul class="p-features">
+            <li><svg class="icon-sm"><use href="#i-check"></use></svg>Everything in Pro</li>
+            <li><svg class="icon-sm"><use href="#i-check"></use></svg>1:1 coaching calls</li>
+            <li><svg class="icon-sm"><use href="#i-check"></use></svg>Custom nutrition plan</li>
+            <li><svg class="icon-sm"><use href="#i-check"></use></svg>Priority support</li>
+          </ul>
+          <a class="btn btn-outline btn-block" href="#">Go Elite</a>
+        </article>
+      </div>
+      <p class="price-note">Cancel anytime. No hidden fees. 7-day free trial on Pro and Elite.</p>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <div class="brand"><svg class="icon brand-mark"><use href="#i-bolt"></use></svg><span>SURGE</span></div>
+        <p>Train with purpose. Track everything. Never stop.</p>
+        <div class="footer-social">
+          <a href="#" aria-label="Instagram"><svg class="icon"><use href="#i-ig"></use></svg></a>
+          <a href="#" aria-label="X"><svg class="icon"><use href="#i-x"></use></svg></a>
+          <a href="#" aria-label="TikTok"><svg class="icon"><use href="#i-note"></use></svg></a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Product</h4>
+        <a href="#workouts">Workouts</a>
+        <a href="#progress">Progress</a>
+        <a href="#trainers">Trainers</a>
+        <a href="#pricing">Pricing</a>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <a href="#">About</a>
+        <a href="#">Careers</a>
+        <a href="#">Blog</a>
+      </div>
+      <div class="footer-col">
+        <h4>Support</h4>
+        <a href="#">Help Center</a>
+        <a href="#">Contact</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2025 SURGE. All rights reserved.</span>
+      <div><a href="#">Privacy</a><a href="#">Terms</a></div>
+    </div>
+  </footer>
+
+</div>
+</body>
+</html>
